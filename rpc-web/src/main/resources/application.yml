@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://58.215.143.164:6208/wondermanager
+      username: web_yyembed_data
+      password: 29S41qeMZl
+mybatis:
+  config-location: classpath:mybatis.cfg.xml      #mybatis配置文件所在路径
+  type-aliases-package: com.yy.platform.common.model.wonderful            #定义所有操作类的别名所在包
+  mapper-locations:                                       #所有的mapper映射文件
+  - classpath:mybatis/mapper/**/*.xml

@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://58.215.143.164:6208/wondermanager
+      username: web_yyembed_data
+      password: 29S41qeMZl
