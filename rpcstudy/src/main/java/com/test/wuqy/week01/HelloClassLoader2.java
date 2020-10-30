@@ -11,11 +11,11 @@ import java.lang.reflect.Method;
  * 执行 hello 方法，此文件内容是一个 Hello.class 文件
  * 所有字节（x=255-x）处理后的文件
  */
-public class HelloClassLoader extends ClassLoader{
+public class HelloClassLoader2 extends ClassLoader{
 
     public static void main(String[] args) {
         try {
-            Class<?> clazz = new HelloClassLoader().findClass("Hello");
+            Class<?> clazz = new HelloClassLoader2().findClass("Hello");
             Method method = clazz.getMethod("hello");
             method.invoke(clazz.newInstance());
         } catch (Exception e) {
@@ -27,10 +27,8 @@ public class HelloClassLoader extends ClassLoader{
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         String helloFilePath = "E:\\ideaspace\\NettyRpc\\rpcstudy\\src\\main\\java\\com\\test\\wuqy\\week01\\Hello.xlass";
         File helloFile = new File(helloFilePath);
-        //手动关闭流
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(helloFile);
+        //资源自动回收
+        try (FileInputStream fis = new FileInputStream(helloFile)) {
             int size = fis.available();
             byte[] fisByte = new byte[size];
             fis.read(fisByte);
@@ -38,16 +36,10 @@ public class HelloClassLoader extends ClassLoader{
                 fisByte[index] = (byte)(255 - (int)fisByte[index]);
             }
             return defineClass(name, fisByte, 0, fisByte.length);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            if(null != fis) {
-                try {
-                    fis.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
