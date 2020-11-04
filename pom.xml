@@ -15,6 +15,7 @@
         <module>rpc-http</module>
         <module>rpc-dao</module>
         <module>rpc-retry</module>
+        <module>rpc-statemachine</module>
     </modules>
     <dependencies>
         <dependency>
