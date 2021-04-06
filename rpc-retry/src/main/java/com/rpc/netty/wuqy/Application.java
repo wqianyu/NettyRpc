@@ -16,7 +16,6 @@ import org.springframework.retry.annotation.EnableRetry;
 @ComponentScan(basePackages = {"com.rpc.netty.wuqy"})//所有spring相关的包路径都要在此配置
 public class Application {
     public static void main(String[] args) {
-
         SpringApplication.run(Application.class, args);
     }
 
